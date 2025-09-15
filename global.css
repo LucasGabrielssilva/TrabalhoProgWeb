@@ -1,0 +1,257 @@
+/* ==========================================================================
+   1. VARIÁVEIS GLOBAIS (CORES E FONTES)
+   ========================================================================== */
+
+:root {
+    --cor-primaria: #333;
+    --cor-fundo-pagina: #f0f0f0;
+    --cor-superficie: #fff;
+    --cor-acento: #007BFF;
+    --cor-texto-claro: #fff;
+    --cor-texto-escuro: #333;
+    --cor-texto-secundario: #555;
+    --cor-borda: #ddd;
+
+    /* Variáveis específicas para tabelas */
+    --cor-tabela-header: #f2f2f2;
+    --cor-tabela-linha-par: #f9f9f9;
+    --cor-tabela-linha-hover: #f1f1f1;
+
+    --fonte-principal: Arial, sans-serif;
+}
+
+/* ==========================================================================
+   2. RESET BÁSICO E ESTILOS GERAIS
+   ========================================================================== */
+
+/*
+ * Seletor Universal (*): Remove as margens e paddings padrão de todos os
+ * elementos e ajusta o cálculo de tamanho para ser mais intuitivo.
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+ * Estilo base para o corpo (body) da página. Define a fonte, cor de fundo
+ * e cor de texto padrão para todo o site.
+ */
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo-pagina);
+    color: var(--cor-texto-escuro);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. LAYOUT E COMPONENTES PRINCIPAIS
+   ========================================================================== */
+
+/**
+ * Classe .container: É o principal contêiner de conteúdo.
+ * Use esta classe para envolver a área principal de cada página.
+ * Ela centraliza o conteúdo, define uma largura máxima e cria o efeito
+ * de "cartão" com fundo branco e sombra.
+ */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Classe .main-header: Define o estilo do cabeçalho principal do site.
+ * Deve ser usada na tag <header> no topo das páginas.
+ */
+.main-header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding: 20px;
+    text-align: center;
+}
+
+/**
+ * Classe .main-footer: Define o estilo do rodapé principal do site.
+ * Deve ser usada na tag <footer> na parte inferior das páginas.
+ */
+.main-footer {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* ==========================================================================
+   4. TIPOGRAFIA E TABELAS
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--cor-acento);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/**
+ * Classe .data-table: Classe genérica para estilizar tabelas de dados.
+ * Foi projetada para ser reutilizável em qualquer página que precise
+ * de uma tabela bem formatada, como Ranking e Histórico de Partidas.
+ */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid var(--cor-borda);
+    padding: 12px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: var(--cor-tabela-header);
+    font-weight: bold;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: var(--cor-tabela-linha-par);
+}
+
+.data-table tr:hover {
+    background-color: var(--cor-tabela-linha-hover);
+}
+
+/* ==========================================================================
+   5. BOTÕES E FORMULÁRIOS
+   ========================================================================== */
+
+/**
+ * Classe .btn: É a classe padrão para todos os botões de ação principal
+ * do sistema (ex: Entrar, Salvar, Cadastrar). Garante que todos os botões
+ * tenham a mesma aparência.
+ */
+.btn {
+    display: inline-block;
+    background-color: var(--cor-acento);
+    color: var(--cor-texto-claro);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+/**
+ * Classe .form-group: Usada em formulários para agrupar um <label>
+ * (o título do campo) e um <input> (o campo de digitação).
+ * Sua principal função é criar um espaçamento vertical consistente
+ * entre os campos do formulário.
+ */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-group input:disabled {
+    background-color: #E9ECEF;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   6. RESPONSIVIDADE
+   ========================================================================== */
+
+/*
+ * Media Query para telas de até 768px (tablets).
+ * Ajusta o layout para telas menores.
+ */
+@media (max-width: 768px) {
+    .container {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .main-header nav a {
+        margin: 0 10px;
+    }
+}
+
+/*
+ * Media Query para telas de até 480px (celulares).
+ * Faz ajustes mais drásticos para garantir a usabilidade
+ * em telas pequenas.
+ */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        margin: 0;
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .main-header {
+        padding: 15px;
+    }
+
+    .main-header nav a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px;
+    }
+}
