@@ -1,0 +1,141 @@
+:root {
+    --cor-primaria: #333;
+    --cor-fundo-pagina: #f0f0f0;
+    --cor-superficie: #fff;
+    --cor-acento: #007BFF;
+    --cor-texto-claro: #fff;
+    --cor-texto-escuro: #333;
+    --cor-texto-secundario: #555;
+    --cor-borda: #ddd;
+
+    
+    --cor-tabela-header: #f2f2f2;
+    --cor-tabela-linha-par: #f9f9f9;
+    --cor-tabela-linha-hover: #f1f1f1;
+
+    --fonte-principal: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+h2,h3 {
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--cor-acento);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid var(--cor-borda);
+    padding: 12px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: var(--cor-tabela-header);
+    font-weight: bold;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: var(--cor-tabela-linha-par);
+}
+
+.data-table tr:hover {
+    background-color: var(--cor-tabela-linha-hover);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--cor-acento);
+    color: var(--cor-texto-claro);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-group input:disabled {
+    background-color: #E9ECEF;
+    cursor: not-allowed;
+}
+
+.alt-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.alt-link a {
+  color: var(--cor-acento);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.1s ease;
+  outline: none;
+}
+
+.alt-link a:hover,
+.alt-link a:focus {
+  color: #125092; 
+  text-decoration: none; 
+  outline: none; 
+}
+
+
+

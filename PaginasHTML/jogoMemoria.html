@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Memória</title>
+  <link rel="stylesheet" href="../FolhasCss/global.css">
+  <link rel="stylesheet" href="../FolhasCss/jogoMemoriaEstilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <header class="main-header">
+    <h1>Jogo da Memória</h1>
+    <nav>
+      <a href="historico.html">Histórico de Partidas</a>
+      <a href="editar-perfil.html">Editar Perfil</a>
+      <a href="index.html">Desconectar</a>
+      <a href="ranking.html">Ranking</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="status-jogo">
+      <p>Tempo: <span id="tempo">00:00</span></p>
+      <p>Jogadas: <span id="jogadas">0</span></p>
+      <p>Modo: <span id="modo">Clássico</span></p>
+      <p>Tabuleiro: <span id="tamanho">4x4</span></p>
+    </section>
+
+    <section id="tabuleiro">
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+      <div class="carta">?</div>
+    </section>
+
+    <section id="controles-jogo">
+      <button id="novo-jogo">Novo Jogo</button>
+      <button id="ver-trapaca">Ver Trapaça</button>
+      <button id="ocultar-trapaca">Ocultar Trapaça</button>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 Jogo da Memória</p>
+  </footer>
+
+</body>
+
+</html>

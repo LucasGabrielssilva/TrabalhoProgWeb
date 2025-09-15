@@ -1,0 +1,76 @@
+
+#mainDiv {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--cor-container);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  font-family: Arial, sans-serif;
+  color: var(--cor-texto);
+}
+
+
+#mainDiv p:first-child {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--cor-primaria);
+}
+
+
+#mainDiv p {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#mainDiv input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#mainDiv input:focus {
+  outline: none;
+  border-color: var(--cor-botoes);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+
+#mainDiv .btn {
+  width: 100%;
+  background-color: var(--cor-botoes);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#mainDiv .btn:hover {
+  background-color: var(--cor-botoes-hover);
+}
+
+
+#mainDiv a {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: var(--cor-botoes);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.1s ease;
+}
+
+#mainDiv a:hover {
+  color:#125092;
+}
