@@ -7,26 +7,29 @@
         <script src="script.js"></script>
     </head>
     <body class="container">
-        <div id="mainDiv">Registre-se:</div>
+    <form>
+        <div id="mainDiv" class="form-group">Registre-se:
         <p>Nome completo: </p>
-        <input  class="form-group" name="nome" placeholder="digite seu nome" size=40>
+        <input  name="nome" placeholder="digite seu nome" size=40>
         <p>Data de Nascimento:</p>
-        <input class="form-group" name="datanasc" type="date">
+        <input name="datanasc" type="date">
         <p>CPF:</p>
-        <input class="form-group" name="cpf" placeholder="000.000.000-00" size=11>
+        <input   name="cpf" placeholder="000.000.000-00" size=11>
         <p>Telefone:</p>
-        <input class="form-group" name="telefone" placeholder="(99) 99999-9999">
+        <input   name="telefone" placeholder="(99) 99999-9999">
         <p>Email:</p>
-        <input  class="form-group" name="email" placeholder="digite seu email" size=40>
+        <input  name="email" placeholder="digite seu email" size=40>
         <p>Usuário: </p>
-        <input class="form-group" name="usuario" placeholder="digite seu usario" size=20>
+        <input   name="usuario" placeholder="digite seu usario" size=20>
         <p>Senha:</p>
-        <input type="password" name="senha" class="form-group"  placeholder="digite sua senha" size=20>
+        <input type="password" name="senha"    placeholder="digite sua senha" size=20>
         <p>Digite novamente sua senha:</p>
-        <input type="password" name="confirmasenha" class="form-group" placeholder="digite nova sua senha" size=20>
+        <input type="password" name="confirmasenha"   placeholder="digite nova sua senha" size=20>
         <br />
         <p></p>
         <button class="btn" onclick="registrarUsuario(nome, email, usuario, senha, confirmasenha)">Registrar</button>
         <a href="login.html">Já tem uma conta? Faça login!</a>
+        </div>
+    </form>
     </body>
 </html>
