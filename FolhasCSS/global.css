@@ -61,6 +61,7 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  
 }
 
 
@@ -69,5 +70,8 @@ body {
   padding: 15px;
   background-color: var(--cor-header-footer);
   color: #fff;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
