@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Jogo da Memoria</title>
-        <link rel="stylesheet" href="estiloforms.css" />
-        <script src="script.js"></script>
-    </head>
-    <body class="body">
-        <div id="mainDiv" class="DivPrin">Entre para Jogar!</div>
-        <p>
-            Usuário: 
-            <input class="input" name="usuario" placeholder="digite seu usario" size=20>
-        </p>
-        <p>
-            Senha:
-            <input name="senha" class="input" type="password"  placeholder="digite sua senha" size=20>
-        </p>
-        <p>
-            <button class="botao" onclick="login(usuario, senha)">Entrar</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jogo da Memória</title>
+    
+    <link rel="stylesheet" href="global.css">
+    
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Jogo da Memória</h1>
+    </header>
+
+    <main class="container">
+        
+        <h2>Entre para Jogar!</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="usuario">Usuário:</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+            
+            <button type="button" class="btn" onclick="login(document.getElementById('usuario').value, document.getElementById('senha').value)">Entrar</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1.5rem;">
             <a href="registrese.html">Não possui conta? Registre-se!</a>
         </p>
-    </body>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p> 2025 Jogo da Memória. Todos os direitos reservados.</p>
+    </footer>
+    
+</body>
 </html>
