@@ -33,9 +33,9 @@ h2 {
     margin-bottom: 30px;
 }
 
-/* Tabela de Dados */
+
 .data-table {
-    width: 100%; /* <<-- CORREÇÃO APLICADA AQUI */
+    width: 100%; 
     border-collapse: collapse;
 }
 
@@ -62,7 +62,6 @@ h2 {
     background-color: #e9e9e9;
 }
 
-/* Badges de Resultado */
 .vitoria, .derrota {
     padding: 5px 12px;
     border-radius: 15px;
