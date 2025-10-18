@@ -30,37 +30,95 @@
       <p>Tabuleiro: <span id="tamanho">4x4</span></p>
     </section>
 
+    <section id="seletor-tamanho">
+      <h2 class="hidden">Seletor de Tamanho</h2>
+      <button onclick="iniciarJogo(2)" data-tamanho="2">2x2</button>
+      <button onclick="iniciarJogo(4)" data-tamanho="4">4x4</button>
+      <button onclick="iniciarJogo(6)" data-tamanho="6">6x6</button>
+      <button onclick="iniciarJogo(8)" data-tamanho="8">8x8</button>
+    </section>
+
     <section id="tabuleiro">
       <h2 class="hidden">Tabuleiro do Jogo</h2>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
-      <div class="carta">?</div>
     </section>
 
     <section id="controles-jogo">
       <h2 class="hidden">Controles do Jogo</h2>
       <button id="novo-jogo">Novo Jogo</button>
       <button id="ver-trapaca">Ver Trapaça</button>
-      <button id="ocultar-trapaca">Ocultar Trapaça</button>
     </section>
   </main>
 
   <footer class="main-footer">
-    <p>&copy; 2025 Jogo da Memória</p>
+    <p>&copy; 2025 Jogo da Memória - Programação para Web</p>
   </footer>
+
+  <script>
+    var cartas = [];
+    var cartasViradas = [];
+    var tamanhoTabuleiro = 0;
+    var jogadas = 0;
+    var jogandoAtual = false;
+    var verificandoPar = false;
+    
+
+    //Símbolos para as cartas [REMOVER]
+    var simbolos = [] // TODO: Aqui tem q estar um array com os simbolos para as cartas (a depender de como implementaram os simbolos)
+
+    // Embaralhar cartas
+    function embaralharCartas(tamanho) {
+      var totalCartas = tamanho * tamanho;
+      var numPares = totalCartas / 2;
+
+      // Criar pares de cartas
+      var cartasDoJogo = [];
+      for (var i = 0; i < numPares; i++) {
+        var valor = simbolos[i]; // TODO: Aqui tem q estar um array com os simbolos para as cartas (a depender de como implementaram os simbolos)
+        cartasDoJogo.push({ id: i * 2, valor: valor, virada: false, encontrada: false });
+        cartasDoJogo.push({ id: i * 2 + 1, valor: valor, virada: false, encontrada: false });
+      }
+
+      // Algoritmo para embaralhar (Fisher-Yates)
+      for (var i = cartasDoJogo.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = cartasDoJogo[i];
+        cartasDoJogo[i] = cartasDoJogo[j];
+        cartasDoJogo[j] = temp;
+      }
+
+      return cartasDoJogo;
+    }
+
+    // Iniciando o jogo
+    function iniciarJogo(tamanho) {
+      // Reiniciando variáveis globais
+      tamanhoTabuleiro = tamanho;
+      cartas = embaralharCartas(tamanho);
+      cartasViradas = [];
+      jogadas = 0;
+      jogandoAtual = true;
+      verificandoPar = false;
+
+      // Atualizar interface
+      document.getElementById('jogadas').textContent = '0';
+      document.getElementById('tempo').textContent = '00:00';
+      document.getElementById('tamanho').textContent = tamanho + 'x' + tamanho;
+
+      // Atualizar botões ativos
+      var botoes = document.querySelectorAll('#seletor-tamanho button');
+      for (var i = 0; i < botoes.length; i++) {
+        botoes[i].classList.remove('ativo');
+        if (botoes[i].getAttribute('data-tamanho') == tamanho) {
+          botoes[i].classList.add('ativo');
+        }
+      }
+    }
+
+    // Iniciar o jogo quando a página carregar
+    window.onload = function () {
+      iniciarJogo(4);
+    };
+  </script>
 
 </body>
 
