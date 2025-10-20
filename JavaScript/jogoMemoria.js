@@ -19,6 +19,30 @@ let totalPares = 0;
 const EMOJIS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛'];
 
 // ==========================================================
+// TAREFA 4: CONTADOR DE JOGADAS (CÓDIGO NOVO ADICIONADO AQUI)
+// ==========================================================
+
+/**
+ * Incrementa o contador de jogadas e atualiza o display na tela.
+ */
+function incrementarJogada() {
+    // Usa a variável global 'jogadas' que você já declarou.
+    jogadas++; 
+    if (jogadasSpan) {
+        jogadasSpan.textContent = jogadas;
+    }
+}
+
+/**
+ * Reseta o contador de jogadas para o início de uma nova partida.
+ */
+function resetarJogadas() {
+    jogadas = 0; 
+    if (jogadasSpan) {
+        jogadasSpan.textContent = jogadas;
+    }
+}
+// ==========================================================
 // TAREFA 1: LÓGICA PRINCIPAL 
 // ==========================================================
 
@@ -57,6 +81,8 @@ window.iniciarJogo = function(tamanho) {
     }
 
     // TAREFA 4 (Lógica integrada): Resetar contadores na interface
+    // TAREFA FUNÇÃO DE RESET
+    resetarJogadas();
     jogadasSpan.textContent = '0';
     tamanhoSpan.textContent = `${tamanho}x${tamanho}`;
     // TAREFA 3 (Lógica integrada): Resetar cronômetro
@@ -124,6 +150,7 @@ function virarCarta() {
     // TAREFA 4 (Lógica integrada): Contabiliza a jogada
     jogadas++;
     jogadasSpan.textContent = jogadas;
+    incrementarJogada();
 
     verificarPar();
 }
