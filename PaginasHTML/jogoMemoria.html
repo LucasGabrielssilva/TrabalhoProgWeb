@@ -38,6 +38,12 @@
       <button onclick="iniciarJogo(8)" data-tamanho="8">8x8</button>
     </section>
 
+    <section id="seletor-modo">
+        <h2>Selecione o Modo</h2>
+        <button id="btn-modo-classico" onclick="setModoJogo('Classico')" data-modo="Classico" class="ativo">Clássico</button>
+        <button id="btn-modo-tempo" onclick="setModoJogo('Contra o Tempo')" data-modo="Contra o Tempo">Contra o Tempo</button>
+    </section>
+
     <section id="tabuleiro">
       <h2 class="hidden">Tabuleiro do Jogo</h2>
     </section>
