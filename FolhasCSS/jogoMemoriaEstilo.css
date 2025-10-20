@@ -86,3 +86,35 @@ h2 {
 }
 
 
+
+
+
+/* Efeito de transição para a virada da carta */
+.carta {
+  transition: transform 0.5s, background-color 0.3s;
+  transform-style: preserve-3d;
+}
+
+/* ESTADO 1: Carta Virada durante a jogada */
+.carta.virada {
+  background-color: #a7d7f9; /* Um azul claro para indicar seleção */
+  transform: rotateY(180deg); /* Efeito de "flip" */
+  cursor: default;
+}
+
+/* ESTADO 2: Par correto encontrado */
+.carta.par-correto {
+  background-color: #a8e6cf; /* Um verde para indicar acerto */
+  color: #1a5e42;
+  border-color: #1a5e42;
+  transform: rotateY(180deg); /* Mantém virada */
+  cursor: default;
+}
+
+/* ESTADO 3: Par errado selecionado */
+.carta.erro {
+  background-color: #ff8a80; /* Um vermelho para indicar erro */
+  color: #b71c1c;
+  border-color: #b71c1c;
+} 
+
