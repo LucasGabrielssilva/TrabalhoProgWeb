@@ -11,6 +11,29 @@ h2 {
   padding: 10px;
   border-radius: 8px;
 }
+#seletor-tamanho {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#seletor-tamanho button {
+  background-color: #666;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#seletor-tamanho button:hover {
+  background-color: #555;
+}
+
+#seletor-tamanho button.ativo {
+  background-color: #333;
+}
 
 #tabuleiro {
   display: grid;

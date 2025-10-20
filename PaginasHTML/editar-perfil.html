@@ -26,7 +26,7 @@
   <main class="container">
     <section class="card">
       <h2 class="card-title">Editar Informações Pessoais</h2>
-      <p class="muted">Atualize seus dados abaixo. Campos marcados como <span class="badge">Não editável</span> não
+      <p class="muted">Atualize seus dados abaixo. Campos marcados como <span class="badge">(Não editável)</span> não
         podem ser alterados.</p>
 
       <form class="form-group" action="update_profile.php" method="POST" novalidate>
@@ -41,7 +41,6 @@
           <label for="telefone">Telefone</label>
           <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999"
             pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$" aria-describedby="telefoneHelp">
-          <small id="telefoneHelp" class="help">Formato sugerido: (DD) 99999-9999</small>
         </div>
 
         <!-- E-mail -->
@@ -54,27 +53,22 @@
 
         <!-- Data de Nascimento -->
         <div class="form-row">
-          <label for="nascimento">Data de nascimento (Não editável)</label>
+          <label for="nascimento">Data de nascimento <span class="badge">(Não editável)</span></label>
           <input type="date" id="nascimento" name="nascimento" value="1990-01-01" disabled
             aria-describedby="nascimentoAviso">
-          <small id="nascimentoAviso" class="help">Campo não editável</small>
         </div>
 
         <!-- CPF -->
         <div class="form-row">
-          <label for="cpf">CPF (Não editável)</label>
+          <label for="cpf">CPF <span class="badge">(Não editável)</span> </label>
           <input type="text" id="cpf" name="cpf" value="000.000.000-00" inputmode="numeric" disabled
             aria-describedby="cpfAviso">
-          <small id="cpfAviso" class="help">Campo não editável</small>
         </div>
 
         <!-- Username -->
         <div class="form-row">
           <label for="username">Username <span class="badge">(Não editável)</span></label>
           <input type="text" id="username" name="username" value="jogador123" disabled aria-describedby="userAviso">
-          <small id="userAviso" class="help help-lock">
-            O username é fixo e identifica sua conta.
-          </small>
         </div>
 
         <div class="actions">
