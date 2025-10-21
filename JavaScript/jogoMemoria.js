@@ -1,61 +1,85 @@
-// --- SELEÇÃO DOS ELEMENTOS DO HTML ---
 const tabuleiro = document.getElementById('tabuleiro');
 const jogadasSpan = document.getElementById('jogadas');
 const tempoSpan = document.getElementById('tempo');
 const tamanhoSpan = document.getElementById('tamanho');
 const verTrapacaBtn = document.getElementById('ver-trapaca');
 const novoJogoBtn = document.getElementById('novo-jogo');
+const modoSpan = document.getElementById('modo');
 
-// --- ESTADO DO JOGO ---
-let cartas = []; // Array de objetos que representa o jogo
+let cartas = [];
 let primeiraCarta = null;
 let segundaCarta = null;
-let travarTabuleiro = false; // Impede cliques durante a verificação
+let travarTabuleiro = false;
 let jogadas = 0;
 let paresEncontrados = 0;
 let totalPares = 0;
+let tamanhoAtual = 4;
+let modoAtual = 'Clássico';
 
-// Símbolos para as cartas (pode ser alterado facilmente)
+let segundos = 0;
+let intervaloTempo = null;
+let tempoLimite = 120;
+
+function iniciarCronometro() {
+    clearInterval(intervaloTempo);
+
+    if (modoAtual === 'Clássico') {
+        segundos = 0;
+        tempoSpan.textContent = '00:00';
+
+        intervaloTempo = setInterval(() => {
+            segundos++;
+            const minutos = String(Math.floor(segundos / 60)).padStart(2, '0');
+            const segundosFormatados = String(segundos % 60).padStart(2, '0');
+            tempoSpan.textContent = `${minutos}:${segundosFormatados}`;
+        }, 1000);
+
+    } else if (modoAtual === 'Contra o Tempo') {
+        segundos = tempoLimite;
+
+        intervaloTempo = setInterval(() => {
+            const minutos = String(Math.floor(segundos / 60)).padStart(2, '0');
+            const segundosFormatados = String(segundos % 60).padStart(2, '0');
+            tempoSpan.textContent = `${minutos}:${segundosFormatados}`;
+
+            if (segundos <= 0) {
+                clearInterval(intervaloTempo);
+                alert('⏱️ Tempo esgotado! Você perdeu.');
+                desabilitarTodasAsCartas();
+                return;
+            }
+
+            segundos--;
+        }, 1000);
+    }
+}
+
+function pararCronometro() {
+    clearInterval(intervaloTempo);
+}
+
+function desabilitarTodasAsCartas() {
+    const todas = document.querySelectorAll('.carta');
+    todas.forEach(carta => carta.removeEventListener('click', virarCarta));
+}
+
 const EMOJIS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛'];
 
-// ==========================================================
-// TAREFA 4: CONTADOR DE JOGADAS (CÓDIGO NOVO ADICIONADO AQUI)
-// ==========================================================
-
-/**
- * Incrementa o contador de jogadas e atualiza o display na tela.
- */
 function incrementarJogada() {
-    // Usa a variável global 'jogadas' que você já declarou.
-    jogadas++; 
-    if (jogadasSpan) {
-        jogadasSpan.textContent = jogadas;
-    }
+    jogadas++;
+    jogadasSpan.textContent = jogadas;
 }
 
-/**
- * Reseta o contador de jogadas para o início de uma nova partida.
- */
 function resetarJogadas() {
-    jogadas = 0; 
-    if (jogadasSpan) {
-        jogadasSpan.textContent = jogadas;
-    }
+    jogadas = 0;
+    jogadasSpan.textContent = jogadas;
 }
-// ==========================================================
-// TAREFA 1: LÓGICA PRINCIPAL 
-// ==========================================================
 
-/**
- * Prepara e embaralha as cartas para o jogo.
- * @param {number} tamanho - A dimensão do tabuleiro (ex: 4 para 4x4).
- */
 function embaralharCartas(tamanho) {
     totalPares = (tamanho * tamanho) / 2;
     const simbolosDoJogo = EMOJIS.slice(0, totalPares);
-    const baralho = [...simbolosDoJogo, ...simbolosDoJogo]; // Duplica para formar pares
+    const baralho = [...simbolosDoJogo, ...simbolosDoJogo];
 
-    // Algoritmo de embaralhamento Fisher-Yates
     for (let i = baralho.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [baralho[i], baralho[j]] = [baralho[j], baralho[i]];
@@ -63,57 +87,6 @@ function embaralharCartas(tamanho) {
     cartas = baralho;
 }
 
-/**
- * Configura e inicia um novo jogo com o tamanho especificado.
- * @param {number} tamanho - A dimensão do tabuleiro.
- */
-window.iniciarJogo = function(tamanho) {
-    // Resetar variáveis
-    jogadas = 0;
-    paresEncontrados = 0;
-    travarTabuleiro = false;
-    primeiraCarta = null;
-    segundaCarta = null;
-
-    // TAREFA 2: Mostrar mensagem de "Jogo reiniciado!"
-    if (document.querySelector('.carta')) { // Mostra a mensagem apenas se não for a primeira carga
-        alert('Jogo reiniciado!');
-    }
-
-    // TAREFA 4 (Lógica integrada): Resetar contadores na interface
-    // TAREFA FUNÇÃO DE RESET
-    resetarJogadas();
-    jogadasSpan.textContent = '0';
-    tamanhoSpan.textContent = `${tamanho}x${tamanho}`;
-    // TAREFA 3 (Lógica integrada): Resetar cronômetro
-    
-    tempoSpan.textContent = '00:00';
-
-    embaralharCartas(tamanho);
-    renderizarTabuleiro(tamanho); 
-}
-
-/**
- * Verifica se as duas cartas viradas formam um par.
- */
-function verificarPar() {
-    const ehPar = primeiraCarta.dataset.value === segundaCarta.dataset.value;
-
-    if (ehPar) {
-        desabilitarCartas();
-    } else {
-        desvirarCartas();
-    }
-}
-
-// ==========================================================
-// TAREFA 2: INTERFACE DINÂMICA (Sua responsabilidade principal)
-// ==========================================================
-
-/**
- * Cria os elementos HTML das cartas e os exibe no tabuleiro.
- * @param {number} tamanho - A dimensão do tabuleiro para estilização.
- */
 function renderizarTabuleiro(tamanho) {
     tabuleiro.innerHTML = '';
     tabuleiro.style.gridTemplateColumns = `repeat(${tamanho}, 1fr)`;
@@ -121,21 +94,17 @@ function renderizarTabuleiro(tamanho) {
     cartas.forEach((simbolo, index) => {
         const cartaDiv = document.createElement('div');
         cartaDiv.classList.add('carta');
-        cartaDiv.dataset.index = index; // Identificador único
-        cartaDiv.dataset.value = simbolo; // O valor para comparação
-        cartaDiv.textContent = '?'; // Começa virada para baixo
-        cartaDiv.addEventListener('click', virarCarta); // Adiciona o evento de clique
+        cartaDiv.dataset.index = index;
+        cartaDiv.dataset.value = simbolo;
+        cartaDiv.textContent = '?';
+        cartaDiv.addEventListener('click', virarCarta);
         tabuleiro.appendChild(cartaDiv);
     });
 }
 
-/**
- * Lida com o clique em uma carta, implementando o efeito de virar.
- */
 function virarCarta() {
     if (travarTabuleiro || this === primeiraCarta) return;
 
-    // TAREFA 2: Implementa o efeito visual de virar a carta
     this.classList.add('virada');
     this.textContent = this.dataset.value;
 
@@ -147,35 +116,33 @@ function virarCarta() {
     segundaCarta = this;
     travarTabuleiro = true;
 
-    // TAREFA 4 (Lógica integrada): Contabiliza a jogada
-    jogadas++;
-    jogadasSpan.textContent = jogadas;
     incrementarJogada();
-
     verificarPar();
 }
 
-/**
- * Mantém os pares corretos virados usando a classe CSS 'par-correto'.
- */
+function verificarPar() {
+    const ehPar = primeiraCarta.dataset.value === segundaCarta.dataset.value;
+
+    if (ehPar) {
+        desabilitarCartas();
+    } else {
+        desvirarCartas();
+    }
+}
+
 function desabilitarCartas() {
     primeiraCarta.removeEventListener('click', virarCarta);
     segundaCarta.removeEventListener('click', virarCarta);
 
-    // TAREFA 2: Usa classe CSS para indicar o par correto
     primeiraCarta.classList.add('par-correto');
     segundaCarta.classList.add('par-correto');
-    
+
     paresEncontrados++;
     resetarTurno();
     verificarFimDeJogo();
 }
 
-/**
- * Desvira as cartas erradas após um tempo, usando a classe CSS 'erro'.
- */
 function desvirarCartas() {
-    // TAREFA 2: Usa classe CSS para indicar o erro
     primeiraCarta.classList.add('erro');
     segundaCarta.classList.add('erro');
 
@@ -188,29 +155,20 @@ function desvirarCartas() {
     }, 1200);
 }
 
-/**
- * Reseta as variáveis de controle do turno.
- */
 function resetarTurno() {
     [primeiraCarta, segundaCarta, travarTabuleiro] = [null, null, false];
 }
 
-/**
- * Verifica se o jogo terminou e exibe a mensagem de vitória.
- */
 function verificarFimDeJogo() {
     if (paresEncontrados === totalPares) {
-        // TAREFA 3 (Lógica integrada): pararCronometro();
+        pararCronometro();
         setTimeout(() => {
-            // TAREFA 2: Mostra a mensagem "Você venceu!"
-            alert(`Você venceu em ${jogadas} jogadas!`);
+            alert(`🎉 Você venceu em ${jogadas} jogadas!`);
+            iniciarJogo(tamanhoAtual);
         }, 500);
     }
 }
 
-/**
- * TAREFA 2: Função para o botão "Ver Trapaça".
- */
 function ativarTrapaca() {
     const todasAsCartas = document.querySelectorAll('.carta');
     todasAsCartas.forEach(carta => {
@@ -218,7 +176,6 @@ function ativarTrapaca() {
             carta.textContent = carta.dataset.value;
         }
     });
-    // Desvira as cartas após um tempo para que a trapaça seja momentânea
     setTimeout(() => {
         todasAsCartas.forEach(carta => {
             if (!carta.classList.contains('virada')) {
@@ -228,21 +185,56 @@ function ativarTrapaca() {
     }, 2000);
 }
 
-// --- EVENT LISTENERS ---
+window.iniciarJogo = function (tamanho) {
+    tamanhoAtual = tamanho;
+
+    jogadas = 0;
+    paresEncontrados = 0;
+    travarTabuleiro = false;
+    primeiraCarta = null;
+    segundaCarta = null;
+
+    if (document.querySelector('.carta')) {
+        alert('Jogo reiniciado!');
+    }
+
+    resetarJogadas();
+    pararCronometro();
+    iniciarCronometro();
+
+    embaralharCartas(tamanho);
+    renderizarTabuleiro(tamanho);
+}
+
+window.setModoJogo = function (modo) {
+    modoAtual = modo;
+    modoSpan.textContent = modo;
+
+    document.querySelectorAll('#seletor-modo button').forEach(btn => {
+        btn.classList.remove('ativo');
+    });
+
+    if (modo === 'Clássico') {
+        document.getElementById('btn-modo-classico').classList.add('ativo');
+    } else if (modo === 'Contra o Tempo') {
+        document.getElementById('btn-modo-tempo').classList.add('ativo');
+    }
+
+    iniciarJogo(tamanhoAtual);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    iniciarJogo(4); // Inicia o jogo com 4x4 por padrão
+    iniciarJogo(4);
 });
 
 verTrapacaBtn.addEventListener('click', ativarTrapaca);
 novoJogoBtn.addEventListener('click', () => {
-    const tamanhoAtivo = document.querySelector('#seletor-tamanho button.ativo').dataset.tamanho;
-    iniciarJogo(parseInt(tamanhoAtivo));
+    iniciarJogo(tamanhoAtual);
 });
 
-// Adiciona eventos aos botões de tamanho
 document.querySelectorAll('#seletor-tamanho button').forEach(button => {
     button.addEventListener('click', () => {
-        document.querySelector('#seletor-tamanho button.ativo').classList.remove('ativo');
+        document.querySelector('#seletor-tamanho button.ativo')?.classList.remove('ativo');
         button.classList.add('ativo');
         iniciarJogo(parseInt(button.dataset.tamanho));
     });
