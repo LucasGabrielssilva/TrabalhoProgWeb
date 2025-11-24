@@ -205,6 +205,37 @@ window.iniciarJogo = function (tamanho) {
     embaralharCartas(tamanho);
     renderizarTabuleiro(tamanho);
 }
+async function salvarPartida(tempo, tentativas, pares, modo, tabuleiro) {
+    // Prepara os dados como se fosse um formulário HTML
+    const formData = new FormData();
+    formData.append('tempo', tempo);         // Ex: 120 (segundos)
+    formData.append('tentativas', tentativas); // Ex: 15
+    formData.append('pares', pares);         // Ex: 8
+    formData.append('modo', modo);           // Ex: 'difícil'
+    formData.append('tabuleiro', tabuleiro); // Ex: '4x4'
+
+    try {
+        const response = await fetch('php/registrar.php', { // Ajuste o caminho se necessário
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.sucesso) {
+            console.log("Partida salva!", data.mensagem);
+            alert("Parabéns! Seu resultado foi salvo.");
+        } else {
+            console.error("Erro ao salvar:", data.mensagem);
+            // Se o erro for "Login necessário", redirecionar
+            if(response.status === 401 || response.status === 403) {
+                window.location.href = 'login.html';
+            }
+        }
+    } catch (error) {
+        console.error("Erro na requisição:", error);
+    }
+}
 
 window.setModoJogo = function (modo) {
     modoAtual = modo;
