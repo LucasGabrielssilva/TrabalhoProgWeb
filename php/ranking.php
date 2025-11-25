@@ -1,12 +1,18 @@
 <?php
+ini_set('display_errors', 0); // não mostra erros na tela
+error_reporting(0);
 include 'conexao.php';
 
-// Ranking by least time, then least attempts (best score per user)
-$sql = "SELECT u.nome, MIN(p.tempo_segundos) as melhor_tempo, MIN(p.jogadas) as melhor_jogadas
+
+$sql = "SELECT 
+            u.username, 
+            COUNT(*) as vitorias,
+            SUM(p.jogadas) as total_jogadas,
+            AVG(p.tempo_segundos) as tempo_medio
         FROM usuarios u
         JOIN partidas p ON u.id = p.id_usuario
-        GROUP BY u.id, u.nome
-        ORDER BY melhor_tempo ASC, melhor_jogadas ASC
+        GROUP BY u.id, u.username
+        ORDER BY vitorias DESC, tempo_medio ASC
         LIMIT 10";
 
 $result = $conn->query($sql);

@@ -1,3 +1,5 @@
+<?php require_once "../php/proteger.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +15,9 @@
   <header class="main-header">
     <h1>Jogo da Memória</h1>
     <nav>
-      <a href="jogoMemoria.html">Voltar para o jogo</a>
-      <a href="editar-perfil.html">Editar Perfil</a>
-      <a href="index.html">Desconectar</a>
+      <a href="jogoMemoria.php">Voltar para o jogo</a>
+      <a href="editar-perfil.php">Editar Perfil</a>
+      <a href="../php/logout.php">Desconectar</a>
     </nav>
   </header>
 
@@ -31,28 +33,7 @@
           <th>Resultado</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Lucas</td>
-          <td>4x4</td>
-          <td>02:15</td>
-          <td>20</td>
-          <td class="vitoria">Vitória</td>
-        </tr>
-        <tr>
-          <td>Ana</td>
-          <td>6x6</td>
-          <td>04:45</td>
-          <td>35</td>
-          <td class="derrota">Derrota</td>
-        </tr>
-        <tr>
-          <td>João</td>
-          <td>4x4</td>
-          <td>01:50</td>
-          <td>18</td>
-          <td class="vitoria">Vitória</td>
-        </tr>
+      <tbody id="historico-table-body">
       </tbody>
     </table>
   </main>
@@ -61,6 +42,7 @@
     <p class="muted">© 2025 Jogo da Memória</p>
   </footer>
 
+  <script src="../JavaScript/historico.js"></script>
 </body>
 
 </html>

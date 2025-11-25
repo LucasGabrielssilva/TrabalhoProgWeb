@@ -1,3 +1,5 @@
+<?php require_once "../php/proteger.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -17,9 +19,9 @@
     </div>
 
     <nav class="nav">
-      <a class="nav-link" href="jogoMemoria.html" title="Voltar ao jogo">Voltar para o jogo</a>
-      <a class="nav-link" href="historico.html" title="Ver histórico de partidas">Histórico de Partidas</a>
-      <a href="login.html">Desconectar</a>
+      <a class="nav-link" href="jogoMemoria.php" title="Voltar ao jogo">Voltar para o jogo</a>
+      <a class="nav-link" href="historico.php" title="Ver histórico de partidas">Histórico de Partidas</a>
+      <a href="../php/logout.php">Desconectar</a>
     </nav>
   </header>
 

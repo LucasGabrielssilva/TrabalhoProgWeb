@@ -162,12 +162,23 @@ function resetarTurno() {
 function verificarFimDeJogo() {
     if (paresEncontrados === totalPares) {
         pararCronometro();
+
+        // 🔥 Chamada para salvar automaticamente no banco:
+        salvarPartida(
+            segundos,               // tempo gasto
+            jogadas,                // número de jogadas
+            paresEncontrados,       // pares encontrados
+            modoAtual,              // modo: Clássico / Contra Tempo
+            `${tamanhoAtual}x${tamanhoAtual}` // tamanho do tabuleiro
+        );
+
         setTimeout(() => {
             alert(`🎉 Você venceu em ${jogadas} jogadas!`);
             iniciarJogo(tamanhoAtual);
         }, 500);
     }
 }
+
 
 function ativarTrapaca() {
     const todasAsCartas = document.querySelectorAll('.carta');
@@ -215,7 +226,7 @@ async function salvarPartida(tempo, tentativas, pares, modo, tabuleiro) {
     formData.append('tabuleiro', tabuleiro); // Ex: '4x4'
 
     try {
-        const response = await fetch('php/registrar.php', { // Ajuste o caminho se necessário
+        const response = await fetch('../php/registrar.php', { // Ajuste o caminho se necessário
             method: 'POST',
             body: formData
         });

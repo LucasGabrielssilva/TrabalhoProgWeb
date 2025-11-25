@@ -1,3 +1,5 @@
+<?php require_once "../php/proteger.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -14,10 +16,10 @@
   <header class="main-header">
     <h1>Jogo da Memória</h1>
     <nav>
-      <a href="historico.html">Histórico de Partidas</a>
-      <a href="editar-perfil.html">Editar Perfil</a>
-      <a href="ranking.html">Ranking</a>
-      <a href="/TrabalhoProgWeb/php/logout.php">Desconectar</a>
+      <a href="historico.php">Histórico de Partidas</a>
+      <a href="editar-perfil.php">Editar Perfil</a>
+      <a href="ranking.php">Ranking</a>
+      <a href="../php/logout.php">Desconectar</a>
     </nav>
   </header>
 

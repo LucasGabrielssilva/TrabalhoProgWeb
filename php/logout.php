@@ -1,11 +1,7 @@
 <?php
-// logout.php
 session_start();
-
-// Destrói todas as variáveis de sessão
 $_SESSION = array();
 
-// Se for preciso matar o cookie da sessão 
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -14,10 +10,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Destrói a sessão
 session_destroy();
-
-// Redireciona para o login
-header("Location: ../PaginasHTML/login.html");
+header("Location: ../PaginasHTML/login.php");
 exit;
 ?>
